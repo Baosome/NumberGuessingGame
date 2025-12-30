@@ -17,14 +17,14 @@ export default function index() {
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen userNumber = {userNumber} />;
   }
 
   return (
     <LinearGradient colors={[colors.Primary3, colors.Accent]} style={style.rootScreen}>
       <ImageBackground
         source={require('../assets/images/background.png')}
-        resizeMode='stretch' style={style.rootScreen} imageStyle={{ opacity: .15 }}>
+        resizeMode='cover' style={style.rootScreen} imageStyle={{ opacity: .15 }}>
         <SafeAreaView style={style.rootScreen}>
           {screen}
         </SafeAreaView>
