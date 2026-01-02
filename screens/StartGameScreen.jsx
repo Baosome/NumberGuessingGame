@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Alert, StyleSheet, TextInput, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
+import Card from "../components/ui/Card";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Title from "../components/ui/Title";
 import colors from '../constants/colors';
 
 export default function StartGameScreen({ onPickNumber }) {
@@ -27,12 +29,14 @@ export default function StartGameScreen({ onPickNumber }) {
     }
 
     return (
-        <View>
-            <View style={style.inputContainer}>
+        <View style={style.rootContainer}>
+            <Title>Guess My Number</Title>
+            <Card>
+                <Text style={style.descriptionText}>Enter a number between 1 and 99</Text>
                 <TextInput style={style.numberInput} maxLength={2} keyboardType="number-pad"
                     autoCapitalize="none" autoCorrect={false} value={enteredNumber}
                     onChangeText={numberInputHandler} />
-            </View>
+            </Card>
             <View style={style.buttonsContainer}>
                 <View style={style.buttonContainer}>
                     <PrimaryButton onPress={() => setEnteredNumber('')}>Reset</PrimaryButton>
@@ -47,20 +51,16 @@ export default function StartGameScreen({ onPickNumber }) {
 };
 
 const style = StyleSheet.create({
-    inputContainer: {
-        padding: 16,
+    rootContainer: {
+        flex: 1,
         marginTop: 100,
-        marginHorizontal: 24,
-        backgroundColor: colors.Primary2,
-        borderRadius: 8,
-        elevation: 4,
-        shadowColor: 'black',
-        shadowRadius: 6,
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.3,
-        alignItems: 'center',
     },
-
+    descriptionText: {
+        fontSize: 18,
+        color: colors.Accent,
+        textAlign: 'center',
+        marginBottom: 8,
+    },
     numberInput: {
         height: 50,
         width: 50,
@@ -80,6 +80,4 @@ const style = StyleSheet.create({
     buttonContainer: {
         flex: 1,
     }
-
-
 })
