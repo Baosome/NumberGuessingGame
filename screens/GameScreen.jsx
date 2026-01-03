@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import NumberContainer from '../components/game/NumberContainer';
 import Card from "../components/ui/Card";
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -22,18 +22,20 @@ function generateRanNumBetween(min, max, exclude) {
 }
 
 
-export default function GameScreen({ userNumber , onGameOver}) {
+export default function GameScreen({ userNumber, onGameOver }) {
 
     const initialGuess = generateRanNumBetween(1, 100, userNumber)
     const [currGuess, setCurrGuess] = useState(initialGuess);
+    const [prevGuesses, setPrevGuesses] = useState([]);
 
     useEffect(() => {
         if (currGuess === userNumber) {
             Alert.alert('Game Over', 'The opponent guessed your number!', [{ text: 'OK', style: 'default' }])
             onGameOver();
+            minBoundary = 1;
+            maxBoundary = 100;
         }
     }, [currGuess, userNumber, onGameOver]);
-
 
     function nextGuessHandler(direction) {
         if (direction === 'lower' && currGuess < userNumber ||
@@ -49,6 +51,7 @@ export default function GameScreen({ userNumber , onGameOver}) {
         }
         const newRndNum = generateRanNumBetween(minBoundary, maxBoundary, currGuess)
         setCurrGuess(newRndNum)
+        setPrevGuesses(currPrevGuesses => [newRndNum, ...currPrevGuesses]);
     }
 
     return (
@@ -69,11 +72,12 @@ export default function GameScreen({ userNumber , onGameOver}) {
                 </View>
             </Card>
 
-            <View>
-                <Text>Your Number</Text>
-            </View>
-            <View>
-                {/* LOG ROUNDS */}
+            <View style={styles.logContainer}>
+                <Text style={styles.logTitle}>Previous guesses: </Text>
+                <FlatList data={prevGuesses} renderItem={({ item }) =>
+                    <View style={styles.logBox}>
+                        <Text style={styles.logText}>Round: {prevGuesses.indexOf(item) + 1} Guess: {item}</Text>
+                    </View>} />
             </View>
         </View>
     )
@@ -96,4 +100,36 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 8,
     },
+    logTitle: {
+        fontSize: 20,
+        color: colors.Accent,
+        marginVertical: 12,
+        fontWeight: 'bold',
+    },
+    logText: {
+        fontSize: 25,
+        color: colors.Primary,
+        textAlign: 'center',
+    },
+    logContainer: {
+        alignItems: 'center',
+        height: '20%',
+        flex: 1,
+
+    },
+    logBox: {
+        borderColor: colors.Primary,
+        borderWidth: 2,
+        borderRadius: 8,
+        padding: 8,
+        paddingHorizontal: 88,
+        marginVertical: 3,
+        backgroundColor: colors.Accent,
+        alignItems: 'center',
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 3,
+        shadowOpacity: 0.25,
+    }
 })

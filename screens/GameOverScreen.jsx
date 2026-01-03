@@ -1,14 +1,18 @@
+import PrimaryButton from "@/components/ui/PrimaryButton";
 import { StyleSheet, Text, View } from "react-native";
 import colors from '../constants/colors';
 
-export default function GameOverScreen() {
+export default function GameOverScreen({userNumber, onStartNewGame}) {
     return (
         <View style={styles.screen}>
             <Text style={styles.descriptionText}>Game Over!</Text>
             <Text style={styles.summaryText}>
-                Your Phone needed <Text style={styles.infoText}>X</Text> rounds to guess the 
-                <Text style={styles.infoText}>Y</Text>.
+                Your Phone needed <Text style={styles.infoText}>{}</Text> rounds to guess the number:
+                <Text style={styles.infoText}> {userNumber}</Text>
             </Text>
+            <View style={styles.buttonContainer}>
+                <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
+            </View>
         </View>
     )
 }
@@ -17,23 +21,26 @@ export default function GameOverScreen() {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        justifyContent: 'center',
+        marginTop: 100,
         alignItems: 'center',
     },
     descriptionText: {
         fontSize: 32,
         color: colors.Accent,
         textAlign: 'center',
-        marginBottom: 8,
+        marginBottom: 32,
     },
     summaryText: {
-        fontSize: 16,
+        fontSize: 20,
         color: 'white',
-
-    }, 
-    infoText: {
-        fontSize: 18,
-        color: colors.Accent,
-
+        textAlign: 'center',
     },
+    infoText: {
+        fontSize: 24,
+        color: colors.Accent,
+        fontWeight: 'bold',
+    },
+    buttonContainer: {
+        marginTop: 48,
+    }
 })
