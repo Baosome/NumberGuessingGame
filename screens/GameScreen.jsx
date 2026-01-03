@@ -26,12 +26,12 @@ export default function GameScreen({ userNumber, onGameOver }) {
 
     const initialGuess = generateRanNumBetween(1, 100, userNumber)
     const [currGuess, setCurrGuess] = useState(initialGuess);
-    const [prevGuesses, setPrevGuesses] = useState([]);
+    const [prevGuesses, setPrevGuesses] = useState([initialGuess]);
 
     useEffect(() => {
         if (currGuess === userNumber) {
             Alert.alert('Game Over', 'The opponent guessed your number!', [{ text: 'OK', style: 'default' }])
-            onGameOver();
+            onGameOver(prevGuesses.length); 
             minBoundary = 1;
             maxBoundary = 100;
         }
@@ -64,10 +64,10 @@ export default function GameScreen({ userNumber, onGameOver }) {
                 </View>
                 <View style={styles.buttonContainer}>
                     <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-                        <Ionicons name="md-remove" size={24} color="white" />
+                        <Ionicons name="remove-circle-outline" size={24} color="white" />
                     </PrimaryButton>
                     <PrimaryButton onPress={nextGuessHandler.bind(this, 'higher')}>
-                        <Ionicons name="md-add" size={24} color="white" />
+                        <Ionicons name="add-circle-outline" size={24} color="white" />
                     </PrimaryButton>
                 </View>
             </Card>
@@ -76,7 +76,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
                 <Text style={styles.logTitle}>Previous guesses: </Text>
                 <FlatList data={prevGuesses} renderItem={({ item }) =>
                     <View style={styles.logBox}>
-                        <Text style={styles.logText}>Round: {prevGuesses.indexOf(item) + 1} Guess: {item}</Text>
+                        <Text style={styles.logText}>Round: {prevGuesses.length - prevGuesses.indexOf(item)} Guess: {item}</Text>
                     </View>} />
             </View>
         </View>

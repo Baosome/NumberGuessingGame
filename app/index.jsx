@@ -11,29 +11,31 @@ export default function index() {
 
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameIsOver] = useState(true);
+  const [guessRounds, setGuessRounds] = useState(0);
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
     setGameIsOver(false);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(numberOfRounds) {
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
   }
 
   function onStartNewGame() {
     setUserNumber(null);
-    screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
+    setGuessRounds(0);
   }
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen userNumber = {userNumber} onGameOver={gameOverHandler} />;
+    screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />;
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen userNumber={userNumber} onStartNewGame={onStartNewGame} />;
+    screen = <GameOverScreen userNumber={userNumber} guessRounds={guessRounds} onStartNewGame={onStartNewGame} />;
   }
 
 

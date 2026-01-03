@@ -2,12 +2,12 @@ import PrimaryButton from "@/components/ui/PrimaryButton";
 import { StyleSheet, Text, View } from "react-native";
 import colors from '../constants/colors';
 
-export default function GameOverScreen({userNumber, onStartNewGame}) {
+export default function GameOverScreen({userNumber, onStartNewGame, guessRounds}) {
     return (
         <View style={styles.screen}>
             <Text style={styles.descriptionText}>Game Over!</Text>
             <Text style={styles.summaryText}>
-                Your Phone needed <Text style={styles.infoText}>{}</Text> rounds to guess the number:
+                Your Phone needed <Text style={styles.infoText}>{guessRounds}</Text> rounds to guess the number:
                 <Text style={styles.infoText}> {userNumber}</Text>
             </Text>
             <View style={styles.buttonContainer}>
