@@ -2,12 +2,12 @@
 
 This repository contains a responsive mobile game built with React Native and Expo. The user picks a number, and the app tries to guess it with "Lower" or "Greater" hints.
 
-## Project Overview (STAR components)
+## Project Overview
 
-- **Situation:** Required a standalone mobile application to assist with understanding React Native's component lifecycle and layout systems across different device sizes.
-- **Task:** Create a logically complete "Number Guessing Game" involving three main stages: Game Start, Active Game (guessing loop), and Game Over (reporting results), ensuring smooth transitions and state retention.
-- **Action:** Developed the solution using **React Native** and **Expo**, utilizing modular component architecture. Implemented responsive designs using `Flexbox` and `Dimensions` API, and managed complex game state using React Hooks (`useState`, `useEffect`). Enhanced the visual appeal with `expo-linear-gradient` and custom fonts.
-- **Result:** Produced a robust, interactive app that efficiently handles user inputs and game logic, providing immediate feedback and a seamless user experience on both Android and iOS platforms.
+- Required a standalone mobile application to assist with understanding React Native's component lifecycle and layout systems across different device sizes.
+- Create a logically complete "Number Guessing Game" involving three main stages: Game Start, Active Game (guessing loop), and Game Over (reporting results), ensuring smooth transitions and state retention.
+- Developed the solution using **React Native** and **Expo**, utilizing modular component architecture. Implemented responsive designs using `Flexbox` and `Dimensions` API, and managed complex game state using React Hooks (`useState`, `useEffect`). Enhanced the visual appeal with `expo-linear-gradient` and custom fonts.
+- Produced a robust, interactive app that efficiently handles user inputs and game logic, providing immediate feedback and a seamless user experience on both Android and iOS platforms.
 
 ## Technologies Used
 
